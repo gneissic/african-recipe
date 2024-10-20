@@ -53,6 +53,7 @@ const MoroccoFood = () => {
           />
         ))}
       </div>
+      {error && <p>{error}</p>}
       {isLoading && (
         <p className="animate-pulse text-center mt-[10rem] text-3xl font-semibold text-slate-700">
           Loading your meals.....
