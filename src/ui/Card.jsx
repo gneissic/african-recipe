@@ -1,8 +1,6 @@
 import { Link } from "react-router-dom";
 
 const Card = (props) => {
-  console.log(props.id);
-
   return (
     <Link to={props.id}>
       {" "}

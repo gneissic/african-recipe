@@ -1,9 +1,7 @@
-
+import GhanaFood from "../components/food/GhanaFood";
 
 const GhanaFoodPage = () => {
-  return (
-    <div>GhanaFoodPage</div>
-  )
-}
+  return <GhanaFood />;
+};
 
-export default GhanaFoodPage
+export default GhanaFoodPage;

@@ -2,7 +2,7 @@ import { Fragment, useEffect, useState } from "react";
 import FoodItems from "./FoodItems";
 import FoodHeader from "./FoodHeader";
 
-const ZimbabweFood = () => {
+const MoroccoFood = () => {
   const [error, setError] = useState();
   const [food, setFood] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -11,7 +11,7 @@ const ZimbabweFood = () => {
       const fetchDataHandler = async () => {
         setIsLoading(true);
         const response = await fetch(
-          "https://african-recipe-e04e8-default-rtdb.firebaseio.com/food/botswana.json"
+          "https://african-recipe-e04e8-default-rtdb.firebaseio.com/food/morocco.json"
         );
         if (!response.ok) {
           setError(`oppps ${response.status} unable to fetch data!`);
@@ -53,7 +53,6 @@ const ZimbabweFood = () => {
           />
         ))}
       </div>
-      {<p className="bg-red-900">{error}</p>}
       {isLoading && (
         <p className="animate-pulse text-center mt-[10rem] text-3xl font-semibold text-slate-700">
           Loading your meals.....
@@ -63,4 +62,4 @@ const ZimbabweFood = () => {
   );
 };
 
-export default ZimbabweFood;
+export default MoroccoFood;

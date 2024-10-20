@@ -6,6 +6,9 @@ import NigeriaFoodPage from "./pages/NigeriaFoodPage";
 import ZimbabweFoodPage from "./pages/ZimbabweFoodPage";
 import BotswanaFoodPage from "./pages/BotswanaFoodPage";
 import EthiopiaFoodPage from "./pages/EthiopiaFoodPage";
+import MoroccoFoodPage from "./pages/MoroccoFoodPage";
+import TanzaniaFoodPage from "./pages/TanzaniaFoodPage";
+import TunisiaFoodPage from "./pages/TunisiaFoodPage";
 
 function App() {
   const router = createBrowserRouter([
@@ -15,6 +18,9 @@ function App() {
     { path: "pages/zimbabwe", element: <ZimbabweFoodPage /> },
     { path: "pages/botswana", element: <BotswanaFoodPage /> },
     { path: "pages/ethiopia", element: <EthiopiaFoodPage /> },
+    { path: "pages/morocco", element: <MoroccoFoodPage /> },
+    { path: "pages/tanzania", element: <TanzaniaFoodPage /> },
+    { path: "pages/tunisia", element: <TunisiaFoodPage /> },
   ]);
   return (
     <>

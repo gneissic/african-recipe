@@ -1,5 +1,7 @@
+import NigeriaFood from "../components/food/NigeriaFood";
+
 const NigeriaFoodPage = () => {
-  return <div>NigeriaPage</div>;
+  return <NigeriaFood />;
 };
 
 export default NigeriaFoodPage;

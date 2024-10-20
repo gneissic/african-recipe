@@ -8,7 +8,7 @@ const FoodItems = (props) => {
         <div>
           <img
             src={props.img}
-            className=" w-[23rem] h-[23rem]  rounded-md"
+            className=" w-[20rem] h-[20rem]  rounded-md"
             alt=""
           />
         </div>
@@ -18,7 +18,9 @@ const FoodItems = (props) => {
           </p>
         </div>
         <div className="flex gap-[3rem] items-center">
-          <p className="underline text-green-700">View {props.name} recipe</p>
+          <p className="hover:text-red-700 transition-all duration-100 ease-out underline text-green-700">
+            Learn how to make {props.name}
+          </p>
           <button className="text-white font-pops font-semibold py-2 px-3 rounded-md bg-red-700">
             Order {props.name}
           </button>

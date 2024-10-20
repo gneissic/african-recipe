@@ -5,9 +5,11 @@ import FoodHeader from "./FoodHeader";
 const EthiopiaFood = () => {
   const [error, setError] = useState();
   const [food, setFood] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     try {
       const fetchDataHandler = async () => {
+        setIsLoading(true);
         const response = await fetch(
           "https://african-recipe-e04e8-default-rtdb.firebaseio.com/food/ethiopia.json"
         );
@@ -27,13 +29,13 @@ const EthiopiaFood = () => {
             });
           }
           setFood(foodData);
+          setIsLoading(false);
         }
       };
 
       fetchDataHandler();
     } catch (error) {
       setError(error.message);
-      console.log(error);
     }
   }, []);
 
@@ -52,6 +54,11 @@ const EthiopiaFood = () => {
         ))}
       </div>
       {<p className="bg-red-900">{error}</p>}
+      {isLoading && (
+        <p className="animate-pulse text-center mt-[10rem] text-3xl font-semibold text-slate-700">
+          Loading your meals.....
+        </p>
+      )}
     </Fragment>
   );
 };
