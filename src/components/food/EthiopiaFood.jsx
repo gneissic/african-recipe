@@ -29,6 +29,7 @@ const EthiopiaFood = () => {
             });
           }
           setFood(foodData);
+
           setIsLoading(false);
         }
       };
@@ -46,6 +47,7 @@ const EthiopiaFood = () => {
         {food.map((items) => (
           <FoodItems
             key={items.name}
+            id={items.id}
             name={items.name}
             country={items.country}
             img={items.img}

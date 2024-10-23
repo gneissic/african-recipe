@@ -46,6 +46,7 @@ const BotswanaFood = () => {
         {food.map((items) => (
           <FoodItems
             key={items.name}
+            id={items.id}
             name={items.name}
             country={items.country}
             img={items.img}

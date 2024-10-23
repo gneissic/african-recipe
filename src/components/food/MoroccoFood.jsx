@@ -47,6 +47,7 @@ const MoroccoFood = () => {
           <FoodItems
             key={items.name}
             name={items.name}
+            id={items.id}
             country={items.country}
             img={items.img}
             recipe={items.recipe}
