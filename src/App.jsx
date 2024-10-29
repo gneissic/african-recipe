@@ -25,10 +25,38 @@ import TunisiaDetails from "./pages/TunisiaDetails";
 import { loader as tunisiaLoader } from "./pages/tunisia-loader";
 import { loader as zimbabweLoader } from "./pages/zimbabwe-loader";
 import ZimbabweDetails from "./pages/ZimbabweDetails";
+import { useEffect, useState } from "react";
+import OrderPage from "./pages/OrderPage";
+import { Provider } from "react-redux";
+import reduxStore from "./store";
+import Signup from "./components/auth/SignUp";
+import NewLogin from "./components/auth/NewLogin";
 
 function App() {
+  const { pathname } = location;
+  const [showModal, setShowModal] = useState(false);
+
+  const showModalHandler = () => {
+    setShowModal(true);
+  };
+  const hideModalHandler = () => {
+    setShowModal(false);
+  };
+
+  useEffect(() => {
+    scrollTo(0, 0);
+  }, [pathname]);
   const router = createBrowserRouter([
-    { path: "/", element: <HomePage /> },
+    {
+      path: "/",
+      element: (
+        <HomePage
+          showModal={showModal}
+          hideModalHandler={hideModalHandler}
+          showModalHandler={showModalHandler}
+        />
+      ),
+    },
     { path: "pages/ghana", element: <GhanaFoodPage /> },
     {
       path: "pages/ghana/:ghanaDetail",
@@ -84,10 +112,24 @@ function App() {
       element: <BotswanaFoodDetails />,
       loader: botswanaLoader,
     },
+    {
+      path: "/food/order",
+      element: <OrderPage />,
+    },
+    {
+      path: "/food/login",
+      element: <NewLogin />,
+    },
+    {
+      path: "/food/signUp",
+      element: <Signup />,
+    },
   ]);
   return (
     <>
-      <RouterProvider router={router} />
+      <Provider store={reduxStore}>
+        <RouterProvider router={router} />
+      </Provider>
     </>
   );
 }
