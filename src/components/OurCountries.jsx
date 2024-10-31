@@ -1,17 +1,18 @@
-import { useEffect } from "react";
-import Card from "../ui/Card";
-import { useState } from "react";
+import { useEffect } from 'react';
+import Card from '../ui/Card';
+import { useState } from 'react';
 
 const OurCountries = () => {
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
   const [food, setFood] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
     try {
       const fetchDataHandler = async () => {
         setIsLoading(true);
         const response = await fetch(
-          "https://african-recipe-e04e8-default-rtdb.firebaseio.com/countries.json"
+          'https://african-recipe-e04e8-default-rtdb.firebaseio.com/countries.json',
         );
         if (!response.ok) {
           setError(`oppps ${response.status} unable to fetch data!`);
@@ -38,20 +39,20 @@ const OurCountries = () => {
   }, []);
 
   return (
-    <div className="bg-white pt-[2rem]">
-      <h1 className=" font-bold text-7xl pb-5 mx-auto  italic  border-amber-500 border-b-[1rem] border-dotted  w-[40%]">
+    <div className="bg-white px-[12px] pt-[2rem]">
+      <h1 className="mx-auto w-fit border-b-[0.4rem] border-dotted border-amber-500 px-3 pb-2 text-[33px] font-bold italic sw400:border-b-[0.7rem] sw400:pb-4 sw400:text-4xl md:text-5xl lg:border-b-[0.9rem] lg:text-6xl">
         Our Countries
       </h1>
-      <p className="text-3xl text-center font-pops text-slate-600 font-semibold pt-5">
+      <p className="pt-5 text-center font-pops text-[19px] font-semibold text-slate-600 sw400:text-[23px] lg:text-[27px]">
         We provide different cusines from various countries across Africa. Let
         us dive in!
       </p>
       {isLoading && (
-        <p className="text-center mt-[4rem] text-3xl font-semibold text-red-700 animate-pulse">
+        <p className="mt-[4rem] animate-pulse text-center text-3xl font-semibold text-red-700">
           Loading Countries In A Minute.....
         </p>
       )}
-      <div className="grid  grid-cols-4 mt-[2rem]">
+      <div className="mt-[2rem] flex flex-wrap justify-around gap-1">
         {food.map((info) => (
           <Card
             key={info.id}

@@ -1,17 +1,18 @@
-import { Fragment, useState } from "react";
+import { Fragment, useState } from 'react';
 
-import { Form } from "react-router-dom";
-import { SlEnvolopeLetter } from "react-icons/sl";
-import { AiOutlineWhatsApp, AiOutlineInstagram } from "react-icons/ai";
-import { BsTiktok } from "react-icons/bs";
+import { Form } from 'react-router-dom';
+import { SlEnvolopeLetter } from 'react-icons/sl';
+import { AiOutlineWhatsApp, AiOutlineInstagram } from 'react-icons/ai';
+import { BsTiktok } from 'react-icons/bs';
 
 const Contact = () => {
-  const [name, setName] = useState("");
-  const [mail, setMail] = useState("");
-  const [message, setMessage] = useState("");
+  const [name, setName] = useState('');
+  const [mail, setMail] = useState('');
+  const [message, setMessage] = useState('');
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [loaded, setLoaded] = useState(false);
+
   const enterNameHandler = (e) => {
     setName(e.target.value);
   };
@@ -32,14 +33,14 @@ const Contact = () => {
     setLoaded(false);
     try {
       const response = await fetch(
-        "https://african-recipe-e04e8-default-rtdb.firebaseio.com/userData.json",
+        'https://african-recipe-e04e8-default-rtdb.firebaseio.com/userData.json',
         {
-          method: "POST",
+          method: 'POST',
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
           },
           body: JSON.stringify(userData),
-        }
+        },
       );
 
       if (!response.ok) {
@@ -52,29 +53,29 @@ const Contact = () => {
     } catch (error) {
       setError(`Failed to send message ${error}`);
     }
-    setName("");
-    setMail("");
-    setMessage("");
+    setName('');
+    setMail('');
+    setMessage('');
   };
 
   let loading;
   let sendMessage;
   if (isLoading) {
     loading = (
-      <button className="w-[93%] animate-pulse ml-2 font-pops bg-amber-500 py-3 px-5 text-white font-semibold rounded-md   text-lg">
+      <button className="mx-auto ml-2 w-[93%] animate-pulse rounded-md bg-amber-500 px-5 py-3 font-pops text-lg font-semibold text-white">
         Sending your Review
       </button>
     );
   }
   if (!loading && loaded) {
     loading = (
-      <button className="w-[93%] ml-2 font-pops bg-amber-500 py-3 px-5 text-white font-semibold rounded-md   text-lg">
+      <button className="mx-auto w-[93%] rounded-md bg-amber-500 px-5 py-3 font-pops text-lg font-semibold text-white">
         Send Review
       </button>
     );
     sendMessage = (
-      <div className="w-[80%] m-auto bg-green-300 mt-[4rem] py-3 px-2 font-semibold">
-        <p className="text-center  ">
+      <div className="m-auto mt-[4rem] w-[80%] bg-green-300 px-2 py-3 font-semibold">
+        <p className="text-center">
           Your review has been successfully delivered. We will contact you
           shortly via the mail you provided.
         </p>
@@ -83,19 +84,19 @@ const Contact = () => {
   }
   if (!loading && !loaded) {
     loading = (
-      <button className="w-[93%] ml-2 font-pops bg-amber-500 py-3 px-5 text-white font-semibold rounded-md   text-lg">
+      <button className="mx-auto w-[93%] rounded-md bg-amber-500 px-5 py-3 font-pops text-lg font-semibold text-white">
         Send Review
       </button>
     );
   }
   if (error) {
     sendMessage = (
-      <div className="w-[80%] m-auto bg-red-900 mt-[4rem] py-3 px-2 font-semibold text-white font-pops">
-        <p className="text-center  ">{error}</p>
+      <div className="m-auto mt-[4rem] w-[80%] bg-red-900 px-2 py-3 font-pops font-semibold text-white">
+        <p className="text-center">{error}</p>
       </div>
     );
     loading = (
-      <button className="w-[93%] ml-2 font-pops bg-primary py-3 px-5 text-white font-semibold rounded-md   text-lg">
+      <button className="bg-primary mx-auto w-[93%] rounded-md px-5 py-3 font-pops text-lg font-semibold text-white">
         Send Review
       </button>
     );
@@ -103,20 +104,20 @@ const Contact = () => {
 
   return (
     <Fragment>
-      <div className="bg-white">
-        <h1 className=" font-bold text-7xl pt-[4rem] pb-5 mx-auto  italic  border-amber-500 border-b-[1rem] border-dotted  w-[45%]">
+      <div className="bg-white px-[12px] pb-[3rem] pt-[2rem]">
+        <h1 className="mx-auto w-fit border-b-[0.4rem] border-dotted border-amber-500 px-3 pb-2 text-[33px] font-bold italic sw400:border-b-[0.7rem] sw400:pb-4 sw400:text-4xl md:text-5xl lg:border-b-[0.9rem] lg:text-6xl">
           Send A Review
         </h1>
-        <div className="lg:w-[80%] lg:mx-auto">
+        <div className="lg:mx-auto lg:w-[80%]">
           {sendMessage}
-          <h1 className="pt-[3rem] text-3xl lg:text-4xl  lg:ml-[6rem] tracking-wider font-bold font-pops pl-2">
+          <h1 className="pl-2 pt-[3rem] font-pops text-3xl font-bold tracking-wider lg:ml-[6rem] lg:text-4xl">
             Send Us A Review
           </h1>
           <div className="lg:flex lg:justify-center lg:gap-[2rem]">
             <div className="pt-[2rem]">
               <Form onSubmit={onSubmitUserData}>
-                <div className="grid gap-6">
-                  <div className="lg:flex">
+                <div className="flex flex-col items-center gap-6">
+                  <div className="flex w-[100%] flex-col gap-[10px] lg:flex-row">
                     <input
                       onChange={enterNameHandler}
                       value={name}
@@ -124,7 +125,7 @@ const Contact = () => {
                       name="user-name"
                       required
                       placeholder="Enter your Name"
-                      className=" outline-none w-[90%] lg:w-full ml-3 border rounded-md border-black/50 py-2 font-pops pl-2 font-semibold text-black"
+                      className="mx-auto w-[90%] rounded-md border border-black/50 py-2 pl-2 font-pops font-semibold text-black outline-none lg:w-full"
                     />
                     <input
                       onChange={enterMailHandler}
@@ -133,7 +134,7 @@ const Contact = () => {
                       name="user-mail"
                       required
                       placeholder="Enter your Email address"
-                      className=" outline-none w-[90%]  lg:w-full ml-3 border rounded-md border-black/50 py-2 font-pops pl-2 font-semibold text-black"
+                      className="mx-auto w-[90%] rounded-md border border-black/50 py-2 pl-2 font-pops font-semibold text-black outline-none lg:w-full"
                     />
                   </div>
 
@@ -146,19 +147,19 @@ const Contact = () => {
                     id=""
                     cols="30"
                     rows="5"
-                    className="outline-none w-[90%] lg:w-full ml-3 border rounded-md border-black/50 py-2 font-pops pl-2 font-semibold text-black"
+                    className="mx-auto w-[90%] rounded-md border border-black/50 py-2 pl-2 font-pops font-semibold text-black outline-none lg:w-full"
                   ></textarea>
                 </div>
-                <div className="pt-[0.5rem]">{loading}</div>
+                <div className="flex justify-center pt-[0.5rem]">{loading}</div>
               </Form>
             </div>
             <div className="font-pops text-black">
-              <div className="border border-black/40 rounded-md h-inherit pl-2 py-4 w-[90%] m-auto mt-[2rem]">
-                <h1 className="text-2xl m-auto  border-b border-gray-400 pb-3 w-[85%] font-bold text-black/90">
+              <div className="h-inherit m-auto mt-[2rem] w-[90%] rounded-md border border-black/40 py-4 pl-2">
+                <h1 className="m-auto w-[85%] border-b border-gray-400 pb-3 text-2xl font-bold text-black/90">
                   Our Contact Information
                 </h1>
                 <div className="grid gap-3 pt-3">
-                  <p className="text-2xl font-semibold text-black/90 pl-2 pb-2">
+                  <p className="pb-2 pl-2 text-2xl font-semibold text-black/90">
                     Contact Info
                   </p>
                   <div className="flex items-center gap-3">

@@ -1,15 +1,15 @@
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 const Card = (props) => {
   return (
     <Link to={props.id}>
-      {" "}
+      {' '}
       <div className="cursor-pointer">
-        <div className="ml-5 p-2">
+        <div className="p-2">
           <div>
             <img
               src={props.img}
-              className=" w-[17rem] h-[13rem]  rounded-md"
+              className="h-[13rem] w-[17rem] rounded-md"
               alt=""
             />
           </div>

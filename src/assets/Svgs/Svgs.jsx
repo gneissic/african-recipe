@@ -1,6 +1,6 @@
 const Svgs = () => {
   return (
-    <div className="flex justify-center gap-[4rem] animate-bounce">
+    <div className="sw800:basis-[50%] sw540:flex hidden max-w-[705px] basis-[40%] animate-bounce justify-between">
       <svg
         className=""
         xmlns="http://www.w3.org/2000/svg"
@@ -13,7 +13,7 @@ const Svgs = () => {
       </svg>
 
       <svg
-        className=""
+        className="sw800:inline-block hidden"
         xmlns="http://www.w3.org/2000/svg"
         height="24px"
         viewBox="0 -960 960 960"
@@ -24,7 +24,7 @@ const Svgs = () => {
       </svg>
 
       <svg
-        className=""
+        className="hidden sm:inline-block"
         xmlns="http://www.w3.org/2000/svg"
         height="24px"
         viewBox="0 -960 960 960"
