@@ -63,11 +63,11 @@ const Home = (props) => {
               <span className="font-lato text-[2.8rem] font-bold text-amber-500 sw400:text-[3rem] sm:text-[3.5rem] md:text-[4rem]">
                 Welcome to African Recipes!
               </span>
-              <p className="pt-5 sw400:pt-1">
+              <span className="pt-5 sw400:pt-1">
                 Discover the Rich Tapestry of African Cuisine! Explore a vibrant
                 world of bold flavors, traditional recipes, and authentic dishes
                 from different corners of Africa.
-              </p>
+              </span>
             </p>
             {/* </div> */}
           </div>

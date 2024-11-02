@@ -1,6 +1,6 @@
-import { Fragment, useEffect, useState } from "react";
-import FoodItems from "./FoodItems";
-import FoodHeader from "./FoodHeader";
+import { Fragment, useEffect, useState } from 'react';
+import FoodItems from './FoodItems';
+import FoodHeader from './FoodHeader';
 
 const EthiopiaFood = () => {
   const [error, setError] = useState();
@@ -11,7 +11,7 @@ const EthiopiaFood = () => {
       const fetchDataHandler = async () => {
         setIsLoading(true);
         const response = await fetch(
-          "https://african-recipe-e04e8-default-rtdb.firebaseio.com/food/ethiopia.json"
+          'https://african-recipe-e04e8-default-rtdb.firebaseio.com/food/ethiopia.json',
         );
         if (!response.ok) {
           setError(`oppps ${response.status} unable to fetch data!`);
@@ -43,7 +43,7 @@ const EthiopiaFood = () => {
   return (
     <Fragment>
       <FoodHeader />
-      <div className=" flex justify-around">
+      <div className="mb-[3.5rem] flex flex-wrap justify-around gap-[2.5rem] px-[1.5rem]">
         {food.map((items) => (
           <FoodItems
             key={items.name}
@@ -57,7 +57,7 @@ const EthiopiaFood = () => {
       </div>
       {<p className="bg-red-900">{error}</p>}
       {isLoading && (
-        <p className="animate-pulse text-center mt-[10rem] text-3xl font-semibold text-slate-700">
+        <p className="mt-[10rem] animate-pulse text-center text-3xl font-semibold text-slate-700">
           Loading your meals.....
         </p>
       )}
