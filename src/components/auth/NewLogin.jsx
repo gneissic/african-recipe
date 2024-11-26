@@ -1,18 +1,19 @@
-import { Fragment, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { auth } from "./firebaseConfig";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { useDispatch, useSelector } from "react-redux";
-import { authActions } from "../../store/auth-slice";
+import { Fragment, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { auth } from './firebaseConfig';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { useDispatch, useSelector } from 'react-redux';
+import { authActions } from '../../store/auth-slice';
 
 const NewLogin = () => {
   const isLoggeIn = useSelector((state) => state.product.loggedIn);
+  const [error, setError] = useState('');
 
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const changeEmailHandler = (e) => {
     setEmail(e.target.value);
@@ -27,7 +28,7 @@ const NewLogin = () => {
         // Signed in
         const user = userCredential.user.email;
         const userMail = user.slice(0, -10);
-        navigate("/");
+        navigate('/');
 
         dispatch(authActions.isLoggedIn());
         dispatch(authActions.setUserName(userMail));
@@ -37,17 +38,18 @@ const NewLogin = () => {
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
+        setError(errorMessage);
       });
   };
 
   return (
     <Fragment>
-      <div className=" pt-[4rem] lg:w-[40%] lg:mx-auto">
-        <h1 className=" ml-2 text-3xl tracking-wider font-pops font-bold">
+      <div className="pt-[4rem] lg:mx-auto lg:w-[40%]">
+        <h1 className="ml-2 font-pops text-3xl font-bold tracking-wider">
           Log In
         </h1>
         <form>
-          <div className="grid gap-4 lg:gap-10 pt-7">
+          <div className="grid gap-4 pt-7 lg:gap-10">
             <input
               value={email}
               onChange={changeEmailHandler}
@@ -55,7 +57,7 @@ const NewLogin = () => {
               name="email"
               required
               placeholder="Enter your Email"
-              className=" outline-none w-[90%] ml-3 border rounded-md border-black/50 py-2 font-pops pl-2 font-semibold text-black"
+              className="ml-3 w-[90%] rounded-md border border-black/50 py-2 pl-2 font-pops font-semibold text-black outline-none"
             />
 
             <input
@@ -65,21 +67,26 @@ const NewLogin = () => {
               onChange={changePasswordHandler}
               required
               placeholder="Enter your Password"
-              className=" outline-none w-[90%] ml-3 border rounded-md border-black/50 py-2 font-pops pl-2 font-semibold text-black"
+              className="ml-3 w-[90%] rounded-md border border-black/50 py-2 pl-2 font-pops font-semibold text-black outline-none"
             />
           </div>
+          {error && (
+            <p className="mt-3 text-center font-pops font-semibold text-red-500">
+              {error}
+            </p>
+          )}
           <button
             onClick={loginHandler}
-            className=" ml-2 py-4 rounded-md text-black font-pops font-semibold tracking-wider border border-slate-700 px-6 mt-7"
+            className="ml-2 mt-7 rounded-md border border-slate-700 px-6 py-4 font-pops font-semibold tracking-wider text-black"
           >
             Login
           </button>
-          <p className="pt-3 font-pops text-black/70 font-semibold">
-            Dont have an account?{" "}
-            <span className="text-secondary font-bold font-pops">
-              {" "}
-              <Link to={"/food/signup"}> Sign Up here </Link>
-            </span>{" "}
+          <p className="pt-3 font-pops font-semibold text-black/70">
+            Dont have an account?{' '}
+            <span className="text-secondary font-pops font-bold">
+              {' '}
+              <Link to={'/food/signup'}> Sign Up here </Link>
+            </span>{' '}
           </p>
         </form>
       </div>

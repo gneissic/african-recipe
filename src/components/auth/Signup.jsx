@@ -1,9 +1,9 @@
-import { Fragment, useState } from "react";
-import { Form, Link, useNavigate } from "react-router-dom";
-import { auth } from "./firebaseConfig";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { useDispatch } from "react-redux";
-import { authActions } from "../../store/auth-slice";
+import { Fragment, useState } from 'react';
+import { Form, Link, useNavigate } from 'react-router-dom';
+import { auth } from './firebaseConfig';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { useDispatch } from 'react-redux';
+import { authActions } from '../../store/auth-slice';
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -12,6 +12,7 @@ const Signup = () => {
   const [password, setPassword] = useState();
   const [fullName, setFullName] = useState();
   const [number, setNumber] = useState();
+  const [error, setError] = useState('');
   const formIsValid = password && email && fullName && number;
   const changeEmailHandler = (e) => {
     setEmail(e.target.value);
@@ -31,13 +32,14 @@ const Signup = () => {
         // Signed up
         const user = userCredential.user;
 
-        navigate("/food/login");
+        navigate('/food/login');
 
         // ...
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
+        setError(errorMessage);
 
         // ..
       });
@@ -45,12 +47,12 @@ const Signup = () => {
 
   return (
     <Fragment>
-      <div className=" pt-[4rem] ">
-        <h1 className=" lg:w-[70%]  lg:mx-auto ml-2 text-3xl lg:w-4xl tracking-wider font-pops font-bold">
+      <div className="pt-[4rem]">
+        <h1 className="lg:w-4xl ml-2 font-pops text-3xl font-bold tracking-wider lg:mx-auto lg:w-[70%]">
           Sign Up
         </h1>
         <Form>
-          <div className="grid  lg:grid-cols-2 lg:w-[70%]  lg:mx-auto gap-4 pt-7 cursor-pointer">
+          <div className="grid cursor-pointer gap-4 pt-7 lg:mx-auto lg:w-[70%] lg:grid-cols-2">
             <input
               type="text"
               name="fullname"
@@ -58,7 +60,7 @@ const Signup = () => {
               onChange={changeFullNameHandler}
               required
               placeholder="Enter your Full Name"
-              className=" outline-none w-[90%] ml-3 border rounded-md border-black/50 py-2 font-pops pl-2 font-semibold text-black"
+              className="ml-3 w-[90%] rounded-md border border-black/50 py-2 pl-2 font-pops font-semibold text-black outline-none"
             />
             <input
               type="email"
@@ -68,7 +70,7 @@ const Signup = () => {
               onChange={changeEmailHandler}
               required
               placeholder="Enter your email address"
-              className=" outline-none w-[90%] ml-3 border rounded-md border-black/50 py-2 font-pops pl-2 font-semibold text-black"
+              className="ml-3 w-[90%] rounded-md border border-black/50 py-2 pl-2 font-pops font-semibold text-black outline-none"
             />
             <input
               type="password"
@@ -78,7 +80,7 @@ const Signup = () => {
               value={password}
               required
               placeholder="Enter your Password"
-              className=" outline-none w-[90%] ml-3 border rounded-md border-black/50 py-2 font-pops pl-2 font-semibold text-black"
+              className="ml-3 w-[90%] rounded-md border border-black/50 py-2 pl-2 font-pops font-semibold text-black outline-none"
             />
             <input
               type="number"
@@ -87,32 +89,37 @@ const Signup = () => {
               onChange={changeNumberHandler}
               required
               placeholder="Enter your Phone Number"
-              className=" outline-none w-[90%] ml-3 border rounded-md border-black/50 py-2  font-pops pl-2 font-semibold text-black"
+              className="ml-3 w-[90%] rounded-md border border-black/50 py-2 pl-2 font-pops font-semibold text-black outline-none"
             />
             <div>
-              <p className="pl-2 pb-2 text-black font-semibold">Referred By:</p>
+              <p className="pb-2 pl-2 font-semibold text-black">Referred By:</p>
               <input
                 type="text"
                 name="refer"
                 placeholder="Optional"
-                className=" outline-none w-[90%] ml-3 border rounded-md border-black/50 py-2 font-pops pl-2 font-semibold text-black"
+                className="ml-3 w-[90%] rounded-md border border-black/50 py-2 pl-2 font-pops font-semibold text-black outline-none"
               />
             </div>
           </div>
-          <div className="lg:w-[70%]  lg:mx-auto ">
+          <div></div>
+
+          {error && (
+            <p className="mt-5 text-center font-pops text-red-600">{error}</p>
+          )}
+          <div className="lg:mx-auto lg:w-[70%]">
             <button
               onClick={signupHandler}
               disabled={!formIsValid}
-              className="disabled:cursor-not-allowed  ml-2 py-4 rounded-md text-black font-pops font-semibold tracking-wider bg-white border border-slate-700 px-6 mt-7"
+              className="ml-2 mt-7 rounded-md border border-slate-700 bg-white px-6 py-4 font-pops font-semibold tracking-wider text-black disabled:cursor-not-allowed"
             >
               Signup
             </button>
-            <p className="pt-3 font-pops text-black/70 font-semibold">
-              Already have an account?{" "}
-              <span className="text-secondary font-bold font-pops">
-                {" "}
-                <Link to={"/food/login"}> Login here </Link>
-              </span>{" "}
+            <p className="pt-3 font-pops font-semibold text-black/70">
+              Already have an account?{' '}
+              <span className="text-secondary font-pops font-bold">
+                {' '}
+                <Link to={'/food/login'}> Login here </Link>
+              </span>{' '}
             </p>
           </div>
         </Form>

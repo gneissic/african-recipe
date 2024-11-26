@@ -22,6 +22,9 @@ const OrderForm = () => {
   const addressIsInValid = !addressIsValid && addressIsTouched;
   const formIsValid =
     userIsValid && lastNameIsValid && numberIsValid && addressIsValid;
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [newLastName, setNewLastname] = useState('');
+  const [formIsSubmitted, setFormIsSubmitted] = useState(false);
 
   const onChangeUserHandler = (e) => {
     setUserName(e.target.value);
@@ -32,6 +35,7 @@ const OrderForm = () => {
 
   const onChangeLastHandler = (e) => {
     setLastName(e.target.value);
+    setNewLastname(lastName);
   };
   const onBlurLastHandler = () => {
     setLastNameIsTouched(true);
@@ -67,6 +71,7 @@ const OrderForm = () => {
       if (!response.ok) {
         throw new Error(`Request failed ${response.status} `);
       }
+      setIsLoaded(true);
     } catch (error) {}
 
     setLastName('');
@@ -77,6 +82,7 @@ const OrderForm = () => {
     setUserNameIsTouched(false);
     setAddressIsTouched(false);
     setNumberIsTouched(false);
+    setFormIsSubmitted(true);
     if (!formIsValid) {
       return;
     }
@@ -120,11 +126,13 @@ const OrderForm = () => {
           <h1 className="mx-auto w-fit border-b-[0.4rem] border-dotted border-amber-500 px-3 pb-2 text-[33px] font-bold italic sw400:border-b-[0.7rem] sw400:pb-4 sw400:text-3xl md:text-4xl lg:border-b-[0.9rem] lg:text-5xl">
             African Recipes!
           </h1>
-          <div className="py-3 text-lg">
-            Hello, you are about to Order {food}, which is
-            <span className="font-semibold text-slate-700">{recipe}</span> .
-            Fill the form below to confirm your order
-          </div>
+          {!formIsSubmitted && (
+            <div className="py-3 text-lg">
+              Hello, you are about to Order {food}, which is
+              <span className="font-semibold text-slate-700">{recipe}</span> .
+              Fill the form below to confirm your order
+            </div>
+          )}
           <div>
             <label htmlFor="Surname"> Surname:</label>
             <br />
@@ -208,6 +216,13 @@ const OrderForm = () => {
               Confirm
             </button>
           </div>
+        </div>
+        <div>
+          {isLoaded && (
+            <p className="text-center font-pops font-semibold text-green-500">
+              Thank you {newLastName}, your order has been successfully sent!
+            </p>
+          )}
         </div>
       </form>
     </Fragment>
