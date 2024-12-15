@@ -2,12 +2,9 @@ import { Fragment, useState } from 'react';
 import { Form, Link, useNavigate } from 'react-router-dom';
 import { auth } from './firebaseConfig';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { useDispatch } from 'react-redux';
-import { authActions } from '../../store/auth-slice';
 
 const Signup = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [fullName, setFullName] = useState();
@@ -30,14 +27,13 @@ const Signup = () => {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed up
-        const user = userCredential.user;
+        userCredential.user;
 
         navigate('/food/login');
 
         // ...
       })
       .catch((error) => {
-        const errorCode = error.code;
         const errorMessage = error.message;
         setError(errorMessage);
 

@@ -1,16 +1,19 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 const initialAuthState = {
   loggedIn: false,
-  nameOfFood: "",
-  recipeName: "",
-  userName: "",
+  nameOfFood: '',
+  recipeName: '',
+  userName: '',
 };
 const authSlice = createSlice({
-  name: "products",
+  name: 'products',
   initialState: initialAuthState,
   reducers: {
     isLoggedIn(state) {
       state.loggedIn = true;
+    },
+    isLoggedOut(state) {
+      state.loggedIn = false;
     },
     foodName(state, action) {
       state.nameOfFood = action.payload;

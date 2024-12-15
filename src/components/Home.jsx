@@ -1,14 +1,23 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../assets/Logo.png';
-import Svgs from '../assets/Svgs/Svgs';
-import img from '../assets/bg-img.avif';
 import Login from './auth/Login';
-import { useSelector } from 'react-redux';
+import { auth } from './auth/firebaseConfig';
+import { signOut } from 'firebase/auth';
 
 const Home = (props) => {
-  const loggedIn = useSelector((state) => state.product.loggedIn);
-  const userName = useSelector((state) => state.product.userName);
-
+  const loggedIn = localStorage.getItem('isLoggedIn');
+  const userName = localStorage.getItem('username');
+  const navigate = useNavigate();
+  const signOutHandler = () => {
+    signOut(auth)
+      .then(() => {
+        localStorage.clear();
+        navigate('/');
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
   return (
     <div>
       {props.showModal && <Login hideModalHandler={props.hideModalHandler} />}
@@ -25,11 +34,19 @@ const Home = (props) => {
             alt="logo"
             className="h-[6rem] md:h-[7rem] lg:h-[8rem]"
           />
-          <Svgs />
           {loggedIn && (
-            <div className="mr-10 flex gap-[1rem] font-pops text-lg text-amber-500">
-              <p className="hidden sw400:inline">Welcome,</p>
-              <p>{userName}</p>
+            <p className="md:text-md hidden font-pops text-2xl font-semibold text-amber-500 lg:block">
+              Welcome, {userName}
+            </p>
+          )}
+          {loggedIn && (
+            <div className="flex">
+              <button
+                onClick={signOutHandler}
+                className="mr-10 rounded-md bg-[#ccccff] px-2.5 py-1.5 md:mr-3 md:px-4 md:py-2.5 lg:px-6 lg:py-4"
+              >
+                Log out
+              </button>
             </div>
           )}
           {!loggedIn && (

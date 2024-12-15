@@ -33,7 +33,7 @@ const Contact = () => {
     setLoaded(false);
     try {
       const response = await fetch(
-        'https://african-recipe-e04e8-default-rtdb.firebaseio.com/userData.json',
+        'https://african-recipe-c6fe5-default-rtdb.firebaseio.com/userData.json',
         {
           method: 'POST',
           headers: {

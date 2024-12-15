@@ -14,8 +14,9 @@ const Card = (props) => {
             />
           </div>
           <div>
-            <p>{props.coordinate}</p>
-            <p className="text-green-700">{props.country}</p>
+            <p className="fonr-semibold font-pops text-lg text-green-700">
+              {props.country}
+            </p>
           </div>
         </div>
       </div>

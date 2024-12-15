@@ -58,7 +58,7 @@ const OrderForm = () => {
 
     try {
       const response = await fetch(
-        'https://african-recipe-e04e8-default-rtdb.firebaseio.com/orderData.json',
+        'https://african-recipe-c6fe5-default-rtdb.firebaseio.com/orderData.json',
         {
           method: 'POST',
           headers: {
@@ -72,7 +72,9 @@ const OrderForm = () => {
         throw new Error(`Request failed ${response.status} `);
       }
       setIsLoaded(true);
-    } catch (error) {}
+    } catch (error) {
+      console.log(error.message);
+    }
 
     setLastName('');
     setUserName('');
@@ -129,10 +131,21 @@ const OrderForm = () => {
           {!formIsSubmitted && (
             <div className="py-3 text-lg">
               Hello, you are about to Order {food}, which is
-              <span className="font-semibold text-slate-700">{recipe}</span> .
+              <span className="font-semibold text-slate-700"> {recipe}</span> .
               Fill the form below to confirm your order
             </div>
           )}
+
+          <div>
+            <label htmlFor="Surname"> Name of dish:</label>
+            <br />
+            <input
+              disabled="true"
+              type="text"
+              className="w-[30%] cursor-not-allowed rounded border py-2 pl-2 font-pops outline-none"
+              value={food}
+            />
+          </div>
           <div>
             <label htmlFor="Surname"> Surname:</label>
             <br />
@@ -199,23 +212,31 @@ const OrderForm = () => {
               <p className="text-red-900">please enter a valid address</p>
             )}
           </div>
-          <div className="flex items-center justify-around">
-            <Link to={'../'}>
+          {!formIsSubmitted ? (
+            <div className="flex items-center justify-around">
+              <Link to={'../'}>
+                <button
+                  onClick={hideFormHandler}
+                  className="ease mt-2 rounded-md bg-red-800 px-4 py-2 font-nun font-semibold text-white transition-all duration-300 hover:bg-green-800"
+                >
+                  Cancel
+                </button>
+              </Link>
+
               <button
-                onClick={hideFormHandler}
-                className="ease mt-2 rounded-md bg-red-800 px-4 py-2 font-nun font-semibold text-white transition-all duration-300 hover:bg-green-800"
+                disabled={!formIsValid}
+                className="ease mt-2 rounded-md bg-red-800 px-4 py-2 font-nun font-semibold text-white transition-all duration-300 hover:bg-green-800 disabled:cursor-not-allowed disabled:bg-gray-600"
               >
-                Cancel
+                Confirm
+              </button>
+            </div>
+          ) : (
+            <Link to={'../'}>
+              <button className='className="ease hover:bg-green-800" mt-2 rounded-md bg-red-800 px-4 py-2 font-nun font-semibold text-white transition-all duration-300'>
+                Go Home
               </button>
             </Link>
-
-            <button
-              disabled={!formIsValid}
-              className="ease mt-2 rounded-md bg-red-800 px-4 py-2 font-nun font-semibold text-white transition-all duration-300 hover:bg-green-800 disabled:cursor-not-allowed disabled:bg-gray-600"
-            >
-              Confirm
-            </button>
-          </div>
+          )}
         </div>
         <div>
           {isLoaded && (

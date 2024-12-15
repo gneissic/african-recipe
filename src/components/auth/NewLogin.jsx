@@ -6,7 +6,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { authActions } from '../../store/auth-slice';
 
 const NewLogin = () => {
-  const isLoggeIn = useSelector((state) => state.product.loggedIn);
+  const isLoggedIn = useSelector((state) => state.product.loggedIn);
+  localStorage.setItem('isLoggedIn', isLoggedIn);
   const [error, setError] = useState('');
 
   const dispatch = useDispatch();
@@ -14,7 +15,6 @@ const NewLogin = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
   const changeEmailHandler = (e) => {
     setEmail(e.target.value);
   };
@@ -32,11 +32,11 @@ const NewLogin = () => {
 
         dispatch(authActions.isLoggedIn());
         dispatch(authActions.setUserName(userMail));
+        localStorage.setItem('username', userMail);
 
         // ...
       })
       .catch((error) => {
-        const errorCode = error.code;
         const errorMessage = error.message;
         setError(errorMessage);
       });

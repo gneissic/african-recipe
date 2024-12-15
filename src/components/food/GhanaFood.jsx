@@ -11,7 +11,7 @@ const GhanaFood = () => {
       const fetchDataHandler = async () => {
         setIsLoading(true);
         const response = await fetch(
-          'https://african-recipe-e04e8-default-rtdb.firebaseio.com/food/ghana.json',
+          'https://african-recipe-c6fe5-default-rtdb.firebaseio.com/food/ghana.json',
         );
         if (!response.ok) {
           setError(`oppps ${response.status} unable to fetch data!`);
